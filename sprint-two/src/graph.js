@@ -3,6 +3,11 @@ var Graph = function(){
   this._size = 0;
 };
 
+var Node = function(value) {
+  this.value = value;
+  this.neighbors = {};
+};
+
 Graph.prototype.addNode = function(newNode, toNode){
   var node = new Node(newNode);
   if (!this.nodes.hasOwnProperty(newNode)) {
@@ -83,10 +88,11 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
   }
 };
 
-var Node = function(value) {
-  this.value = value;
-  this.neighbors = {};
-}
+Graph.prototype.forEachNode = function(iterator) {
+  for (var node in this.nodes) {
+    iterator(node);
+  }
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?

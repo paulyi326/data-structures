@@ -2,8 +2,8 @@ var HashTable = function(){
   this._limit = 8;
   this._storage = makeLimitedArray(this._limit);
   this._size = 0;
-  this._maxLoadFactor = .75;
-  this._minLoadFactor = .25;
+  this._maxLoadFactor = 0.75;
+  this._minLoadFactor = 0.25;
 };
 
 HashTable.prototype._checkLoadFactor = function() {
@@ -14,7 +14,7 @@ HashTable.prototype._checkLoadFactor = function() {
     this._halveStorage();
   }
 
-}
+};
 
 HashTable.prototype._adjustStorage = function(multiplier) {
   if (this._limit * multiplier >= 8) {
@@ -33,16 +33,16 @@ HashTable.prototype._adjustStorage = function(multiplier) {
       }
     });
   }
-}
+};
 
 HashTable.prototype._doubleStorage = function() {
   this._adjustStorage(2);
 
-}
+};
 
 HashTable.prototype._halveStorage = function() {
-  this._adjustStorage(.5);
-}
+  this._adjustStorage(0.5);
+};
 
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
@@ -76,10 +76,9 @@ HashTable.prototype.remove = function(k){
   if (separateChain === undefined) {
     return;
   }
-  var index = undefined;
+  var index;
   for (var j = 0; j < separateChain.length; j++) {
     var key = separateChain[j][0];
-    var value = separateChain[j][1];
     if (key === k) {
       index = j;
       this._size--;
@@ -93,8 +92,6 @@ HashTable.prototype.remove = function(k){
   }
   this._checkLoadFactor();
 };
-
-
 
 /*
  * Complexity: What is the time complexity of the above functions?
