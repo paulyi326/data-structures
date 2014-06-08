@@ -68,7 +68,7 @@ PrefixTree.prototype.t9 = function(numbers) {
       //Return the first available word in an array
       //but only return the first [numbers.length] letters
       if (node.words.length > 0) {
-        return node.words[0].slice(numbers.length-1);
+        return node.words[0].slice(0, numbers.length);
       }
     }
   } else {
